@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Something for You ❤️</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #12000b,
+        #3d001f,
+        #710038
+    );
+
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   OPENING SCREEN
+========================= */
+
+#opening {
+    position: fixed;
+    inset: 0;
+
+    background: linear-gradient(
+        135deg,
+        #18000d,
+        #5c0030,
+        #8f0048
+    );
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    z-index: 100;
+
+    transition: 0.8s;
+}
+
+#opening h1 {
+    font-size: 45px;
+    margin: 10px;
+
+    animation: pulse 1.5s infinite;
+}
+
+#opening h2 {
+    margin: 10px;
+}
+
+#opening p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.openBtn {
+    margin-top: 25px;
+
+    padding: 15px 30px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: white;
+    color: #d6005c;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,0.5);
+
+    transition: 0.3s;
+}
+
+.openBtn:hover {
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.card {
+    width: 90%;
+    max-width: 500px;
+
+    padding: 35px 25px;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(12px);
+
+    text-align: center;
+
+    box-shadow:
+        0 0 40px rgba(255,0,100,0.3);
+
+    z-index: 5;
+}
+
+.card h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons {
+    margin-top: 30px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    position: relative;
+
+    min-height: 100px;
+}
+
+button {
+    border: none;
+
+    padding: 14px 28px;
+
+    border-radius: 30px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.yes {
+    background: #ff247f;
+
+    color: white;
+
+    box-shadow:
+        0 0 20px rgba(255,36,127,0.6);
+}
+
+.yes:hover {
+    transform: scale(1.1);
+}
+
+.no {
+    background: white;
+
+    color: #ff247f;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* =========================
+   SUCCESS
+========================= */
+
+#success {
+    display: none;
+}
+
+#success h1 {
+    font-size: 45px;
+
+    animation: pulse 1s infinite;
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.heart {
+    position: fixed;
+
+    bottom: -20px;
+
+    font-size: 20px;
+
+    animation:
+        floatUp 5s linear forwards;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+.confetti {
+    position: fixed;
+
+    width: 10px;
+    height: 10px;
+
+    top: -10px;
+
+    animation:
+        confettiFall 3s linear forwards;
+
+    z-index: 50;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes pulse {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+}
+
+@keyframes floatUp {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+
+}
+
+@keyframes confettiFall {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    #opening h1 {
+        font-size: 36px;
+    }
+
+    .card h1 {
+        font-size: 32px;
+    }
+
+    .card p {
+        font-size: 16px;
+    }
+
+    button {
+        padding: 12px 22px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     OPENING SCREEN
+========================= -->
+
+<div id="opening">
+
+    <h1>💌</h1>
+
+    <h2>
+        I have something for you...
+    </h2>
+
+    <p>
+        Just one little thing. ❤️
+    </p>
+
+    <button
+        class="openBtn"
+        onclick="openProposal()">
+
+        Tap to open ❤️
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     MUSIC
+========================= -->
+
+<audio id="music">
+
+    <source
+        src="song.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<!-- =========================
+     PROPOSAL
+========================= -->
+
+<div
+    class="card"
+    id="proposal">
+
+    <div id="question">
+
+        <h1>
+            Will you be mine? 🥹❤️
+        </h1>
+
+        <p>
+
+            I have something I've been
+            wanting to ask you...
+
+            <br><br>
+
+            So here goes nothing. 🫶🏻
+
+        </p>
+
+
+        <div class="buttons">
+
+            <button
+                class="yes"
+                id="yesBtn"
+                onclick="sayYes()">
+
+                YES ❤️
+
+            </button>
+
+
+            <button
+                class="no"
+                id="noBtn"
+                onclick="noClicked()">
+
+                NO 😭
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUCCESS -->
+
+    <div id="success">
+
+        <h1>
+            YAYYYYY! 😭❤️
+        </h1>
+
+        <p>
+
+            You said YESSS! 🥹🫶🏻
+
+            <br><br>
+
+            Okay...
+            this just made my whole day. ❤️
+
+        </p>
+
+        <div style="font-size:50px;">
+
+            🥹❤️🫶🏻💐✨
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   GOOGLE APPS SCRIPT URL
+========================================= */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyb5wTN35z6pSgXjpt3cblcKTP9znREJlz8jyrD18b3GaBC7cO70li92P7msTqRpz-VQg/exec";
+
+
+
+/* =========================================
+   RECORD RESPONSE
+========================================= */
+
+function recordResponse(response) {
+
+    fetch(SCRIPT_URL, {
+
+        method: "POST",
+
+        mode: "no-cors",
+
+        headers: {
+            "Content-Type":
+                "application/x-www-form-urlencoded"
+        },
+
+        body:
+            "response=" +
+            encodeURIComponent(response)
+
+    }).catch(() => {});
+
+}
+
+
+
+/* =========================================
+   OPEN PROPOSAL
+========================================= */
+
+function openProposal() {
+
+    const music =
+        document.getElementById("music");
+
+
+    /* Start song at 0:28 */
+
+    music.currentTime = 28;
+
+
+    /*
+       Music starts after
+       the user taps the button.
+    */
+
+    music.play().catch(() => {});
+
+
+    /* Hide opening screen */
+
+    document.getElementById(
+        "opening"
+    ).style.opacity = "0";
+
+
+    setTimeout(() => {
+
+        document.getElementById(
+            "opening"
+        ).style.display = "none";
+
+    }, 800);
+
+
+    startHearts();
+
+}
+
+
+
+/* =========================================
+   YES BUTTON
+========================================= */
+
+function sayYes() {
+
+    /* Record YES */
+
+    recordResponse("YES ❤️");
+
+
+    /* Show success */
+
+    document.getElementById(
+        "question"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "success"
+    ).style.display = "block";
+
+
+    createConfetti();
+
+    startHearts();
+
+}
+
+
+
+/* =========================================
+   NO BUTTON
+========================================= */
+
+let noCount = 0;
+
+
+let noRecorded = false;
+
+
+const messages = [
+
+    "Please 🥺❤️",
+    "Think again 😭",
+    "Are you sure? 🥹",
+    "Pleaseeeeee 🥺👉👈",
+    "Don't do this to me 😭💔",
+    "One more chance? 🥹❤️",
+    "I really like you 👉👈",
+    "You're breaking my heart 😭💔",
+    "Pretty please? 🥺💗",
+    "Just say YESSS 😭❤️",
+    "Come onnnn 🥹🫶🏻",
+    "I'll be waiting 👀❤️",
+    "Okay... last chance 🥺",
+    "PLEASEEEEE 😭❤️",
+    "You sure about that? 👀",
+    "Just give me a chance 🥹❤️",
+    "Don't click NO again 😭",
+    "My heart says YES ❤️",
+    "Please reconsider 🥺👉👈",
+    "Last last chance? 😭❤️",
+
+    "Waittt 😭❤️",
+    "Don't leave me hanging 🥺",
+    "Please don't say no 😭",
+    "Just think about it 🥹❤️",
+    "Can I get one chance? 🫶🏻",
+    "Pretty pleaseee? 🥺",
+    "You're making me nervous 😭",
+    "Okay okay... reconsider? 👀",
+    "Don't break my heart 💔🥹",
+    "I'll take that as a maybe 👀",
+    "Just one YES? ❤️",
+    "Pleaseeee I'm asking nicely 😭👉👈",
+    "Are you really sure? 🥺",
+    "Look at that YES button 👀❤️",
+    "Maybe your heart says YES? 🥹",
+    "Don't be shy 😭❤️",
+    "Come on, you know the answer 👀",
+    "Okay... I'll wait 🥺",
+    "One tiny YES? 🫶🏻",
+    "Please choose YES ❤️",
+    "Still thinking? 😭",
+    "Take your time... but YES? 🥹",
+    "You're making this difficult 😂❤️",
+    "Okay, I'm still hopeful 🥺",
+    "Just one chance? 🥹❤️",
+    "Don't give up on this so quickly 😭❤️",
+    "I'm still waiting 👀❤️",
+    "Maybe try YES this time? 😂❤️",
+    "Nooo don't click that 😭",
+    "Pleaseee, hear me out 🥺",
+    "One more thought? ❤️",
+    "Okay okay... I'll keep asking 😂",
+    "You can't leave me with NO 😭❤️",
+    "I'm still waiting for that YES 👀❤️",
+    "One little YES? 🥹",
+    "Please don't be mean 😭❤️",
+    "Okay... maybe YES? 👀",
+    "Give YES a chance 🫶🏻"
+
+];
+
+
+
+function noClicked() {
+
+    const noBtn =
+        document.getElementById("noBtn");
+
+
+    const yesBtn =
+        document.getElementById("yesBtn");
+
+
+    /* Record first NO */
+
+    if (!noRecorded) {
+
+        recordResponse("NO 😭");
+
+        noRecorded = true;
+
+    }
+
+
+    /* Change message */
+
+    noBtn.innerText =
+        messages[
+            noCount % messages.length
+        ];
+
+
+    noCount++;
+
+
+    /* Make YES bigger */
+
+    let currentSize =
+        17 + (noCount * 2);
+
+
+    yesBtn.style.fontSize =
+        currentSize + "px";
+
+
+    yesBtn.style.padding =
+        (14 + noCount * 1.2) +
+        "px " +
+        (28 + noCount * 2) +
+        "px";
+
+
+    /* Move NO */
+
+    const maxX =
+        Math.min(
+            150,
+            window.innerWidth / 3
+        );
+
+
+    const maxY = 100;
+
+
+    const randomX =
+        Math.random() *
+        (maxX * 2) -
+        maxX;
+
+
+    const randomY =
+        Math.random() *
+        (maxY * 2) -
+        maxY;
+
+
+    noBtn.style.transform =
+        `translate(${randomX}px, ${randomY}px)`;
+
+}
+
+
+
+/* =========================================
+   FLOATING HEARTS
+========================================= */
+
+function startHearts() {
+
+    setInterval(() => {
+
+        const heart =
+            document.createElement("div");
+
+
+        heart.className =
+            "heart";
+
+
+        const heartTypes = [
+
+            "❤️",
+            "💗",
+            "💖",
+            "💕",
+            "💓",
+            "🥹",
+            "🫶🏻"
+
+        ];
+
+
+        heart.innerText =
+            heartTypes[
+                Math.floor(
+                    Math.random() *
+                    heartTypes.length
+                )
+            ];
+
+
+        heart.style.left =
+            Math.random() *
+            100 +
+            "vw";
+
+
+        heart.style.fontSize =
+            (15 + Math.random() * 25) +
+            "px";
+
+
+        heart.style.animationDuration =
+            (3 + Math.random() * 4) +
+            "s";
+
+
+        document.body.appendChild(
+            heart
+        );
+
+
+        setTimeout(() => {
+
+            heart.remove();
+
+        }, 7000);
+
+
+    }, 500);
+
+}
+
+
+
+/* =========================================
+   CONFETTI
+========================================= */
+
+function createConfetti() {
+
+    for (
+        let i = 0;
+        i < 120;
+        i++
+    ) {
+
+        const confetti =
+            document.createElement("div");
+
+
+        confetti.className =
+            "confetti";
+
+
+        confetti.style.left =
+            Math.random() *
+            100 +
+            "vw";
+
+
+        confetti.style.background =
+            [
+                "#ff247f",
+                "#ff5c9a",
+                "#ffffff",
+                "#ffd1e1",
+                "#ffb3cf"
+            ][
+                Math.floor(
+                    Math.random() * 5
+                )
+            ];
+
+
+        confetti.style.animationDuration =
+            (2 + Math.random() * 3) +
+            "s";
+
+
+        confetti.style.animationDelay =
+            Math.random() +
+            "s";
+
+
+        document.body.appendChild(
+            confetti
+        );
+
+
+        setTimeout(() => {
+
+            confetti.remove();
+
+        }, 5000);
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>
