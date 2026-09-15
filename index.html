@@ -18,9 +18,6 @@
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #16000d, #4b001f, #16000d);
             color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .screen {
@@ -67,11 +64,6 @@
             font-weight: bold;
             cursor: pointer;
             margin: 10px;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        button:hover {
-            transform: scale(1.05);
         }
 
         .open-btn {
@@ -178,7 +170,7 @@
 
 <body>
 
-    <!-- OPENING SCREEN -->
+    <!-- OPENING -->
     <div id="opening" class="screen">
         <div class="card">
 
@@ -205,7 +197,9 @@
 
             <h1>Will you be mine?</h1>
 
-            <p id="noMessage">Choose carefully 👀</p>
+            <p id="noMessage">
+                Choose carefully 👀
+            </p>
 
             <div class="buttons">
 
@@ -220,7 +214,6 @@
             </div>
 
         </div>
-
     </div>
 
 
@@ -236,7 +229,6 @@
             <p>Thank you for saying YES! ❤️</p>
 
         </div>
-
     </div>
 
 
@@ -248,12 +240,12 @@
 
     <script>
 
-        /* ==============================
+        /* =========================
            GOOGLE SHEETS
-        ============================== */
+        ========================= */
 
         const SCRIPT_URL =
-       https://script.google.com/macros/s/AKfycbzn04GIdWWRMNAslhdJgbNNN3z_yM0WE4hDFveJrthu7_1W2IqiqS2sWGtT5beOUag0/exec
+        "https://script.google.com/macros/s/AKfycbzn04GIdWWRMNAslhdJgbNNN3z_yM0WE4hDFveJrthu7_1W2IqiqS2sWGtT5beOUag0/exec";
 
 
         function recordResponse(response) {
@@ -273,21 +265,13 @@
         }
 
 
-        /* ==============================
+        /* =========================
            OPEN PROPOSAL
-        ============================== */
+        ========================= */
 
         function openProposal() {
 
-            const music =
-                document.getElementById("music");
-
-            /* Start song from 0:28 */
-
-            music.currentTime = 28;
-
-            music.play().catch(() => {});
-
+            /* Show proposal FIRST */
 
             document.getElementById("opening")
                 .style.display = "none";
@@ -298,12 +282,51 @@
 
             startHearts();
 
+
+            /* MUSIC */
+
+            const music =
+                document.getElementById("music");
+
+
+            try {
+
+                if (music.readyState >= 1) {
+
+                    music.currentTime = 28;
+
+                    music.play().catch(() => {});
+
+                } else {
+
+                    music.addEventListener(
+                        "loadedmetadata",
+
+                        function () {
+
+                            try {
+
+                                music.currentTime = 28;
+
+                                music.play()
+                                    .catch(() => {});
+
+                            } catch (error) {}
+
+                        },
+
+                        { once: true }
+                    );
+                }
+
+            } catch (error) {}
+
         }
 
 
-        /* ==============================
+        /* =========================
            NO BUTTON
-        ============================== */
+        ========================= */
 
         let noCount = 0;
 
@@ -370,6 +393,7 @@
             "Please don't be mean 😭❤️",
             "Okay... maybe YES? 👀",
             "Give YES a chance 🫶🏻"
+
         ];
 
 
@@ -378,7 +402,7 @@
             noCount++;
 
 
-            /* Record only the first NO */
+            /* Record first NO */
 
             if (!noRecorded) {
 
@@ -389,7 +413,7 @@
             }
 
 
-            /* ONLY CHANGE THE WORDS */
+            /* ONLY CHANGE THE MESSAGE */
 
             const message =
                 document.getElementById("noMessage");
@@ -408,9 +432,9 @@
         }
 
 
-        /* ==============================
+        /* =========================
            YES BUTTON
-        ============================== */
+        ========================= */
 
         function sayYes() {
 
@@ -432,13 +456,21 @@
         }
 
 
-        /* ==============================
-           FLOATING HEARTS
-        ============================== */
+        /* =========================
+           HEARTS
+        ========================= */
+
+        let heartsStarted = false;
+
 
         function startHearts() {
 
-            setInterval(() => {
+            if (heartsStarted) return;
+
+            heartsStarted = true;
+
+
+            setInterval(function () {
 
                 const heart =
                     document.createElement("div");
@@ -446,9 +478,19 @@
 
                 heart.className = "heart";
 
+
                 heart.textContent =
-                    ["❤️", "💗", "💕", "💖", "💘"]
-                    [Math.floor(Math.random() * 5)];
+                    [
+                        "❤️",
+                        "💗",
+                        "💕",
+                        "💖",
+                        "💘"
+                    ][
+                        Math.floor(
+                            Math.random() * 5
+                        )
+                    ];
 
 
                 heart.style.left =
@@ -456,20 +498,20 @@
 
 
                 heart.style.fontSize =
-                    (15 + Math.random() * 25) + "px";
+                    (15 +
+                    Math.random() * 25) + "px";
 
 
                 heart.style.animationDuration =
-                    (4 + Math.random() * 5) + "s";
+                    (4 +
+                    Math.random() * 5) + "s";
 
 
                 document.body.appendChild(heart);
 
 
-                setTimeout(() => {
-
+                setTimeout(function () {
                     heart.remove();
-
                 }, 9000);
 
 
@@ -478,19 +520,24 @@
         }
 
 
-        /* ==============================
+        /* =========================
            CONFETTI
-        ============================== */
+        ========================= */
 
         function createConfetti() {
 
-            for (let i = 0; i < 100; i++) {
+            for (
+                let i = 0;
+                i < 100;
+                i++
+            ) {
 
                 const piece =
                     document.createElement("div");
 
 
-                piece.className = "confetti";
+                piece.className =
+                    "confetti";
 
 
                 piece.style.left =
@@ -502,16 +549,16 @@
 
 
                 piece.style.transform =
-                    `rotate(${Math.random() * 360}deg)`;
+                    `rotate(${
+                        Math.random() * 360
+                    }deg)`;
 
 
                 document.body.appendChild(piece);
 
 
-                setTimeout(() => {
-
+                setTimeout(function () {
                     piece.remove();
-
                 }, 5000);
 
             }
